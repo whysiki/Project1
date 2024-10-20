@@ -32,8 +32,6 @@ async def generate_comment(num):
     selected_movie = global_statue.selected_movie
     index = num
     async for comment in selected_movie.get_comments():
-        if index <= 0:
-            break
         # 用户信息
         Fun.AddItemText(
             uiName,
@@ -56,12 +54,13 @@ async def generate_comment(num):
             "end",
         )
         index -= 1
+        if index <= 0:
+            return
 
 
 def run_async_task(num):
     asyncio.run(generate_comment(num))
 
 
-# ListBox 'ListBox_1's MouseWheel Event :
 def ListBox_1_onMouseWheel(event, uiName, widgetName, threadings=0):
-    threading.Thread(target=run_async_task, args=(1,)).start()
+    threading.Thread(target=run_async_task, args=(10,)).start()
