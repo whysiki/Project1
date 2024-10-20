@@ -90,18 +90,20 @@ class Movie:
 
     def get_info(self):
         info = self.__soup.select_one("#info")
-        director = info.select_one("div#info > span > span.attrs > a")
-        director = director.text if director else ""
-        score = self.__soup.select_one("strong[property='v:average']")
-        score = score.text if score else ""
-        commment_num_tag = self.__soup.select_one(
-            "a[href='comments'] > span[property='v:votes']"
-        )
-        return {
-            "director": director,
-            "score": score,
-            "comment_num": commment_num_tag.text if commment_num_tag else "0",
-        }
+        if info:
+            director = info.select_one("div#info > span > span.attrs > a")
+            director = director.text if director else ""
+            score = self.__soup.select_one("strong[property='v:average']")
+            score = score.text if score else ""
+            commment_num_tag = self.__soup.select_one(
+                "a[href='comments'] > span[property='v:votes']"
+            )
+            return {
+                "director": director,
+                "score": score,
+                "comment_num": commment_num_tag.text if commment_num_tag else "0",
+            }
+        return {"director": "", "score": "", "comment_num": "0"}
 
     def get_thumbnail(self):
         thumbnail = self.__soup.select_one("div#mainpic a.nbgnbg img")

@@ -150,7 +150,9 @@ def Entry_1_onKey(event, uiName, widgetName, threadings=0):
 
 
 # ListView 'ListView_1's CellClicked Event :
-def ListView_1_onCellClicked(uiName, widgetName, rowIndex, columnIndex, threadings=0):
+def ListView_1_onCellDoubleClicked(
+    uiName, widgetName, rowIndex, columnIndex, threadings=0
+):
     # print(rowIndex)
     # # print(columnIndex)
     # # print(columnIndex)
@@ -167,7 +169,6 @@ def ListView_1_onCellClicked(uiName, widgetName, rowIndex, columnIndex, threadin
         InputDataArray = Fun.CallUIDialog(
             "Image", topmost, toolwindow, grab_set, wait_window, animation, params
         )
-
         # print(thumnail_pic)
     elif columnIndex == 4:
         # print("Clicked Comment_count")
@@ -181,3 +182,10 @@ def ListView_1_onCellClicked(uiName, widgetName, rowIndex, columnIndex, threadin
             "Comment", topmost, toolwindow, grab_set, wait_window, animation, params
         )
         # print(InputDataArray)
+
+
+# # ListView 'ListView_1's CellDoubleClicked Event :
+# def ListView_1_onCellDoubleClicked(
+#     uiName, widgetName, rowIndex, columnIndex, threadings=0
+# ):
+#     pass
