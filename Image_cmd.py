@@ -1,12 +1,16 @@
 # coding=utf-8
 import sys
+import urllib.request
 import os
 from os.path import abspath, dirname
+import threading
 
+# import urllib3
 sys.path.insert(0, abspath(dirname(__file__)))
 import tkinter
 from tkinter import *
 import Fun
+from Project1_cmd import global_statue
 
 uiName = "Image"
 ElementBGArray = {}
@@ -14,18 +18,22 @@ ElementBGArray_Resize = {}
 ElementBGArray_IM = {}
 
 
+def download_pic(url, save_path):
+    try:
+        urllib.request.urlretrieve(url, save_path)
+        return True
+    except Exception as e:
+        Fun.MessageBox("Error", f"Download Error: {e}")
+        return False
+
+
 # Form 'Form_1's Event :Load
 def Form_1_onLoad(uiName):
-    pass
-    # print("image")
-    # thumnail_pic = Fun.GetUserData("Image", "Canvas_1", "thumnail_pic")
-    # movie_title = Fun.GetUserData("Image", "Canvas_1", "movie_title")
-    # print(thumnail_pic)
-    # print(movie_title)
-    # Fun.SetImage(界面名
-    # uiName,
-    # "Canvas_1",
-    # "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2153898948.jpg",
-    # True,
-    # )
-    # Fun.SetImage(uiName,'Canvas_1',"D:\Backup\Pictures\QQ图片20241006165832.jpg",True)
+    temp_pic = os.path.join(Fun.G_ExeDir, "cache", "temp.jpg")
+    os.makedirs(os.path.join(Fun.G_ExeDir, "cache"), exist_ok=True)
+
+    threading.Thread(
+        target=download_pic, args=(global_statue.selected_movie.thumbnail, temp_pic)
+    ).start()
+
+    Fun.SetImage(uiName, "Canvas_1", temp_pic, True)
