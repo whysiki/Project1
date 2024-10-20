@@ -4,9 +4,7 @@ import sys
 import os
 from   os.path import abspath, dirname
 sys.path.insert(0,abspath(dirname(__file__)))
-ElementBGArray = {}
-ElementBGArray_Resize = {}
-ElementBGArray_IM = {}
+import Comment_cmd
 import Comment_sty
 import Fun
 import tkinter
@@ -27,13 +25,15 @@ class  Comment:
         self.isTKroot = isTKroot
         self.firstRun = True
         Fun.G_UIParamsDictionary[uiName]=params
+        Fun.G_UICommandDictionary[uiName]=Comment_cmd
         Fun.Register(uiName,'root',root)
         style = Comment_sty.SetupStyle(isTKroot)
-        self.UIJsonString ='{"Version": "1.0.0", "UIName": "Comment", "Description": "", "WindowSize": [960, 640], "WindowPosition": "Center", "WindowHide": false, "WindowResizable": true, "WindowTitle": "Comment", "DarkMode": false, "BorderWidth": 0, "BorderColor": "#ffffff", "DropTitle": false, "DragWindow": true, "MinSize": [0, 0], "TransparentColor": null, "RootTransparency": 255, "ICOFile": null, "WinState": 1, "WinTopMost": true, "BGColor": "#EFEFEF", "GroupList": {}, "WidgetList": [{"Type": "Form", "Index": 1, "AliasName": "Form_1", "BGColor": "#EFEFEF", "Size": [960, 640], "EventList": {"Load": "Form_1_onLoad"}}, {"Type": "ListBox", "Index": 2, "AliasName": "ListBox_1", "ParentName": "Form_1", "PlaceInfo": [0, 0.0015625, 400, 265, "nw", true, false], "Visible": true, "Size": [961, 638], "ExportSelection": 1, "BGColor": "#FFFFFF", "SelectMode": "BROWSE", "ScrollBarList": [false, true]}]}'
-        Form_1 = Fun.CreateUIFormJson(uiName,root,isTKroot,style,self.UIJsonString,False)
+        self.UIJsonString = '{"Version": "1.0.0", "UIName": "Comment", "Description": "", "WindowSize": [960, 640], "WindowPosition": "Center", "WindowHide": false, "WindowResizable": true, "WindowTitle": "Comment", "DarkMode": false, "BorderWidth": 0, "BorderColor": "#ffffff", "DropTitle": false, "DragWindow": true, "MinSize": [0, 0], "TransparentColor": null, "RootTransparency": 255, "ICOFile": null, "WinState": 1, "WinTopMost": true, "BGColor": "#EFEFEF", "GroupList": {}, "WidgetList": [{"Type": "Form", "Index": 1, "AliasName": "Form_1", "BGColor": "#EFEFEF", "Size": [960, 640], "EventList": {"Load": "Form_1_onLoad"}}, {"Type": "ListBox", "Index": 2, "AliasName": "ListBox_1", "ParentName": "Form_1", "PlaceInfo": [0, 0.0015625, 961, 638, "nw", true, false], "Visible": true, "Size": [961, 638], "ExportSelection": 1, "BGColor": "#FFFFFF", "SelectMode": "BROWSE", "ScrollBarList": [false, true]}]}'
+        Form_1 = Fun.CreateUIFormJson(uiName,root,isTKroot,style,self.UIJsonString)
         #Inital all element's Data 
         Fun.InitElementData(uiName)
         #Call Form_1's OnLoad Function
+        Fun.RunForm1_CallBack(uiName,"Load",Comment_cmd.Form_1_onLoad)
         #Add Some Logic Code Here: (Keep This Line of comments)
 
 
@@ -65,3 +65,5 @@ class  Comment:
             Fun.ResizeAllChart(self.uiName)
             pass
 #Create the root of tkinter 
+if  __name__ == '__main__':
+    Fun.RunApplication(Comment)

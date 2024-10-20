@@ -29,11 +29,10 @@ def download_pic(url, save_path):
 
 # Form 'Form_1's Event :Load
 def Form_1_onLoad(uiName):
+    #win32gui.SetWindowText(hWinHandle,"")
     temp_pic = os.path.join(Fun.G_ExeDir, "cache", "temp.jpg")
     os.makedirs(os.path.join(Fun.G_ExeDir, "cache"), exist_ok=True)
-
     threading.Thread(
         target=download_pic, args=(global_statue.selected_movie.thumbnail, temp_pic)
     ).start()
-
     Fun.SetImage(uiName, "Canvas_1", temp_pic, True)

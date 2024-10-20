@@ -48,6 +48,8 @@ def Form_1_onLoad(uiName, threadings=0):
     Fun.SetVisible(uiName, "Progress_1", True)
     Fun.SetProgress(uiName, "Progress_1", 100, 0)
     Fun.SetText(uiName, "Label_6", f"{global_statue.page}")
+
+
 async def search_and_display(search_input_text, page: int):
     Fun.DeleteAllRows(uiName, "ListView_1")
     if page in global_statue.page_movies_dict:
@@ -110,6 +112,8 @@ def Button_1_onCommand(uiName, widgetName, threadings=0):
             args=(global_statue.search_input_text, global_statue.page),
         )
         thread.start()
+
+
 # 下一页逻辑
 def Button_2_onCommand(uiName, widgetName, threadings=0):
     if global_statue.page < global_statue.page_count:
@@ -121,6 +125,8 @@ def Button_2_onCommand(uiName, widgetName, threadings=0):
         thread.start()
     else:
         Fun.MessageBox("已经是最后一页了", "", "info", None)
+
+
 # 上一页
 def Button_3_onCommand(uiName, widgetName, threadings=0):
     if global_statue.page > 1:
@@ -132,17 +138,24 @@ def Button_3_onCommand(uiName, widgetName, threadings=0):
         thread.start()
     else:
         Fun.MessageBox("已经是第一页了", "", "info", None)
+
+
 def ListView_1_onHeadingClicked(uiName, widgetName, columnname, threadings=0):
     pass
+
+
 # Entry 'Entry_1's Key Event :
 def Entry_1_onKey(event, uiName, widgetName, threadings=0):
     pass
+
+
 # ListView 'ListView_1's CellClicked Event :
 def ListView_1_onCellClicked(uiName, widgetName, rowIndex, columnIndex, threadings=0):
     # print(rowIndex)
     # # print(columnIndex)
     # # print(columnIndex)
     selected_movide = global_statue.current_movies[rowIndex]
+    global_statue.selected_movie = selected_movide
     if columnIndex == 0:
         thumnail_pic = selected_movide.thumbnail
         topmost = 1
@@ -154,7 +167,17 @@ def ListView_1_onCellClicked(uiName, widgetName, rowIndex, columnIndex, threadin
         InputDataArray = Fun.CallUIDialog(
             "Image", topmost, toolwindow, grab_set, wait_window, animation, params
         )
-        global_statue.selected_movie = selected_movide
-        print(thumnail_pic)
+
+        # print(thumnail_pic)
     elif columnIndex == 4:
-        print("Clicked Comment_count")
+        # print("Clicked Comment_count")
+        topmost = 1
+        toolwindow = 1
+        grab_set = 1
+        wait_window = 1
+        animation = ""
+        params = None
+        InputDataArray = Fun.CallUIDialog(
+            "Comment", topmost, toolwindow, grab_set, wait_window, animation, params
+        )
+        # print(InputDataArray)

@@ -15,12 +15,13 @@ class Comment:
 
     def __init__(self, comment_item_tag: BeautifulSoup):
         self.user = comment_item_tag.select_one("span.comment-info a").text
-        self.rating = (
-            comment_item_tag.select_one("span.comment-info span.rating")["class"][0]
-            .replace("allstar", "")
-            .rstrip("0")
-            or "0"
-        ) + "星"
+        ratingtag = comment_item_tag.select_one("span.comment-info span.rating")
+        if ratingtag:
+            self.rating = (
+                ratingtag["class"][0].replace("allstar", "").rstrip("0") or "0"
+            ) + "星"
+        else:
+            self.rating = "暂无评分"
         self.time = comment_item_tag.select_one("span.comment-time")["title"]
         self.location = comment_item_tag.select_one("span.comment-location").text
         self.content = comment_item_tag.select_one(
@@ -106,20 +107,21 @@ class Movie:
         thumbnail = self.__soup.select_one("div#mainpic a.nbgnbg img")
         return thumbnail["src"]
 
-    async def get_comments(self, start: int, limit: int = 20):
-        url = (
-            f"{self.url}comments?start={start}&limit={limit}&status=P&sort=new_score"
-            if self.url.endswith("/")
-            else f"{self.url}/comments?start={start}&limit={limit}&status=P&sort=new_score"
-        )
-        async with aiohttp.ClientSession() as session:
-            async with session.get(url, headers=self.__headers) as response:
-                html = await response.text()
+    async def get_comments(self, limit: int = 20):
+        for start in range(0, int(self.comment_num), limit):
+            url = (
+                f"{self.url}comments?start={start}&limit={limit}&status=P&sort=new_score"
+                if self.url.endswith("/")
+                else f"{self.url}/comments?start={start}&limit={limit}&status=P&sort=new_score"
+            )
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url, headers=self.__headers) as response:
+                    html = await response.text()
 
-        soup = BeautifulSoup(html, "html.parser")
-        comment_items = soup.select("div.comment-item")
-        for comment_item in comment_items:
-            yield Comment(comment_item)
+            soup = BeautifulSoup(html, "html.parser")
+            comment_items = soup.select("div.comment-item")
+            for comment_item in comment_items:
+                yield Comment(comment_item)
 
 
 @dataclass
