@@ -160,12 +160,17 @@ def ListView_1_onCellClicked(uiName, widgetName, rowIndex, columnIndex, threadin
         grab_set = 1
         wait_window = 1
         animation = ""
-        params = {"thumnail_pic": thumnail_pic}
+        params = None
+
         InputDataArray = Fun.CallUIDialog(
             "Image", topmost, toolwindow, grab_set, wait_window, animation, params
         )
-        print(InputDataArray)
+        Fun.SetImage(
+            "Image", "Canvas_1", r"D:\Backup\Pictures\20241006165832.jpg", True
+        )
 
+        # print(InputDataArray)
+        # Fun.SetImage("Image", "Canvas_1", thumnail_pic, True)
         print(thumnail_pic)
     elif columnIndex == 4:
         print("Clicked Comment_count")
