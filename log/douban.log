@@ -434,3 +434,21 @@ WARNING Error: <class 'TypeError'> on extract_rating, return default value: 暂�
 WARNING Error: <class 'TypeError'> on extract_rating, return default value: 暂无评分
 WARNING Error: <class 'TypeError'> on extract_rating, return default value: 暂无评分
 WARNING Error: <class 'AttributeError'> on get_comment_num, return default value: 0
+WARNING Error: <class 'TypeError'> on extract_rating, return default value: 暂无评分
+WARNING Error: <class 'TypeError'> on extract_rating, return default value: 暂无评分
+WARNING Error: <class 'TypeError'> on extract_rating, return default value: 暂无评分
+WARNING Error: <class 'AttributeError'> on get_director, return default value: 未知导演
+WARNING Error: <class 'AttributeError'> on get_comment_num, return default value: 0
+WARNING Error: <class 'TypeError'> on extract_rating, return default value: 暂无评分
+WARNING Error: <class 'AttributeError'> on get_comment_num, return default value: 0
+WARNING Error: <class 'AttributeError'> on get_director, return default value: 未知导演
+WARNING Error: <class 'AttributeError'> on get_comment_num, return default value: 0
+WARNING Error: <class 'AttributeError'> on get_comment_num, return default value: 0
+WARNING Error: <class 'TypeError'> on extract_rating, return default value: 暂无评分
+WARNING Error: <class 'TypeError'> on extract_rating, return default value: 暂无评分
+WARNING Error: <class 'TypeError'> on extract_rating, return default value: 暂无评分
+WARNING Error: <class 'TypeError'> on extract_rating, return default value: 暂无评分
+WARNING Error: <class 'TypeError'> on extract_rating, return default value: 暂无评分
+WARNING Error: <class 'TypeError'> on extract_rating, return default value: 暂无评分
+WARNING Error: <class 'TypeError'> on extract_rating, return default value: 暂无评分
+WARNING Error: <class 'TypeError'> on extract_rating, return default value: 暂无评分
