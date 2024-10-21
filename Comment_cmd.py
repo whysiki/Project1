@@ -21,6 +21,7 @@ lock = threading.Lock()
 def Form_1_onLoad(uiName):
     Fun.DelAllLines(uiName, "ListBox_1")
     selected_movie = global_statue.selected_movie
+    selected_movie.reset_start()
     comment_num = selected_movie.comment_num
     if int(comment_num) > 0:
         threading.Thread(target=generate_comment, args=(20,)).start()

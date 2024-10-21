@@ -246,6 +246,9 @@ class Movie:
                 self.__current_start += 1
                 yield Comment(comment_item)
 
+    def reset_start(self):
+        self.__current_start = 0
+
 
 @dataclass
 class Search:
