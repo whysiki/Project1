@@ -76,7 +76,8 @@ def start_async_task_from_queue():
 
 def ListBox_1_onMouseWheel(event, uiName, widgetName, threadings=0):
     task_queue.put_nowait(10)
-    threading.Thread(target=start_async_task_from_queue).start()
+    # threading.Thread(target=start_async_task_from_queue).start()
+    start_async_task_from_queue()
 
 
 threading.Thread(target=loop.run_forever).start()
