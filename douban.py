@@ -74,13 +74,6 @@ def error_return_a_default_value(errortype, default_value):
     return decorator
 
 
-# def hashable(cls):
-#     cls.__hash__ = lambda self: hash(
-#         (self.user, self.rating, self.time, self.location, self.content)
-#     )
-#     return cls
-
-
 @dataclass
 class Comment:
     user: str = ""
@@ -115,6 +108,9 @@ class Comment:
 
     def extract_content(self) -> str:
         return self.__comment_item_tag.select_one("p.comment-content > span.short").text
+
+    def __hash__(self) -> int:
+        return hash((self.user, self.time))
 
 
 @dataclass
@@ -233,7 +229,7 @@ class Movie:
                 self.__current_start += 1
                 yield Comment(comment_item)
 
-    def get_comments_sync(self, limit: int = 20):  # 短评
+    def get_comments_sync(self, limit: int = 20):
         while self.__current_start < int(self.comment_num):
             print(f"Current Comment Start: {self.__current_start}")
             url = (
