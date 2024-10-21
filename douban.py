@@ -80,8 +80,10 @@ class Movie:
         return category
 
     def get_title(self):
-        title = self.__soup.select_one("meta[property='og:title']")["content"]
-        return title
+        title_tag = self.__soup.select_one("meta[property='og:title']")
+        if title_tag:
+            return title_tag["content"]
+        return "未知标题"
 
     def get_year(self):
         year = self.__soup.select_one("#content > h1 > span.year").text
