@@ -76,8 +76,10 @@ class Movie:
 
     def get_category(self):
         categorys = self.__soup.select("span[property='v:genre']")
-        category = "/".join([category.text for category in categorys])
-        return category
+        if categorys:
+            category = "/".join([category.text for category in categorys])
+            return category
+        return "未知类型"
 
     def get_title(self):
         title_tag = self.__soup.select_one("meta[property='og:title']")
@@ -86,9 +88,12 @@ class Movie:
         return "未知标题"
 
     def get_year(self):
-        year = self.__soup.select_one("#content > h1 > span.year").text
-        year = re.search(r"\d{4}", year).group()
-        return year
+        year = self.__soup.select_one("#content > h1 > span.year")
+        if year:
+            year = year.text
+            year = re.search(r"\d{4}", year).group()
+            return year
+        return "未知年份"
 
     def get_info(self):
         info = self.__soup.select_one("#info")
